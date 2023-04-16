@@ -10,7 +10,8 @@ Den första delen av projektet fokuserar på att undersöka förutsättningarna 
 ### 1. Problemställning 
 _"Börja med att i text beskriva problemet och vad det är du vill åstadkomma."_ 
 
-Skyfalls alternativt snöfalls förutsägelse för Stockholm. 
+#### Snöfalls förutsägelse för Stockholm. 
+Årligen lamslås Stockholms kollektivtafik av snöfall vilket medför negativa konsekvense för invånarna och viktigtiga sammhällsfuntioner (uttrykningsfordon, etc.). Idealt hade snöfalls förutsägelser kunnat användas för att bättre planera behov av jourhavande snöröjning.
 
 
 
@@ -23,12 +24,16 @@ undersöka hur kompatibelt det är."_
 
 Data som behövs:
 
-- Historisk väderdata
+- Historisk väderdata från Stockholm
     - Nederbörd (mm)
-    - Stockholm (plats)
     - Dag (steglängd)
     - Temperatur?
-        - Ta hänsyn till temperatur ökning per år? / klimatförändringarna
+        - Ta hänsyn till temperaturökning per år? / klimatförändringarna
+
+- [Klimat- och väderstatistik från Stockholms Stad](https://miljobarometern.stockholm.se/klimat/klimat-och-vaderstatistik/)
+    - [Årsnederbörd](https://miljobarometern.stockholm.se/klimat/klimat-och-vaderstatistik/arsnederbord/)
+        - _Nederbörden registreras av SMHI i Observatorielunden i centrala Stockholm. Mätningarna omfattar all nederbörd, både regn och snö. Definitionen på nederbörd är att det uppmätts minst 0,1 mm på ett dygn. Statistik över dygnsvärden kan laddas hem från SMHI Öppna data från 1961, vilket denna indikator baseras på._
+- [SMHI - Meteorologiska observationer](https://www.smhi.se/data/meteorologi/ladda-ner-meteorologiska-observationer/#param=airtemperatureInstant,stations=core,stationid=98210)
 
 ### 3. Inledande dataanalys
 - Komplett dataset?
