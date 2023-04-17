@@ -8,32 +8,44 @@ givet problem.
 Den första delen av projektet fokuserar på att undersöka förutsättningarna för det egna projektet, detta har gjorts i fyra delsteg: 
 
 ### 1. Problemställning 
-_"Börja med att i text beskriva problemet och vad det är du vill åstadkomma."_ 
+_Beskrivning av problemet och mål._ 
 
 #### Snöfalls förutsägelse för Stockholm. 
-Årligen lamslås Stockholms kollektivtafik av snöfall vilket medför negativa konsekvense för invånarna och viktigtiga sammhällsfuntioner (uttrykningsfordon, etc.). Idealt hade snöfalls förutsägelser kunnat användas för att bättre planera behov av jourhavande snöröjning.
+Årligen lamslås Stockholms kollektivtrafik av snöfall vilket medför negativa konsekvens för invånarna och viktiga samhällsfunktioner (utryckningsfordon, etc.). Idealt hade snöfalls förutsägelser kunnat användas för att bättre planera behov av jourhavande snöröjning.
 
 
 
-### 2. Identifierinng av relevant data för att lösa problemet 
-_"Om du inte kommer över lämpligt data får du tänka
-om. Kan du göra en variant på ditt problem som kan lösas med det data du hittat? Om inte, definiera
-ett nytt problem och försök igen.
-Tänk på att datat kan komma från olika källor. Om du hämtar data från olika källor måste du
-undersöka hur kompatibelt det är."_
+### 2. Identifiering av relevant data för att lösa problemet 
 
-Data som behövs:
+#### Identifiera förutsättningar för snö, [källa](https://nsidc.org/learn/parts-cryosphere/snow/science-snow):
 
-- Historisk väderdata från Stockholm
+- För att det ska snöa måste det finnas fuktighet i atmosfären.
+- Snö bildas när den atmosfäriska temperaturen är vid eller under fryspunkten (0°C) .
+- Generell regel: snö bildas inte om marktemperaturen är minst 5°C. 
+- För marktemperaturen vid eller under fryspunkten kan snö nå marken, under optimala förhållanden kan snö nå marken vid högre temperaturer.
+- Det kan inte vara för kallt för att det ska snöa, men det kan vara för torrt.
+- De flesta kraftiga snöfall inträffar när det finns relativt varm luft nära marken (typiskt -9°C eller varmare) eftersom varmare luft kan hålla mer vattenånga. 
+- Väldigt kalla men torra förhållanden ger sällan snöfall. 
+
+#### Identifiera nödvändig data transformation: snö till vatten (nederbörd) förhållande, [källa](https://nsidc.org/learn/parts-cryosphere/snow/science-snow):
+
+
+Snö består av frusna vattenkristaller omgiven av luft vilket medför att luft utgör den störst volymen i ett snölager. Ett vanligt (men inte alltid korrekt) antagande är ett tio-till-ett-förhållande (10:1) mellan snö och vatten. Majoriteten av nysnöfall i USA innehåller ett vatten-till-snö-förhållande mellan 0,04 (4 procent) och 0,10 (10 procent), beroende på de meteorologiska förhållandena som är förknippade med snöfallet. 
+
+I detta projekt kommer det generella 10:1 snö-vatten förhållandet att användas.
+
+
+#### --> Data som behövs:
+
+- Historisk väderdata från Stockholm innehållande:
     - Nederbörd (mm)
-    - Dag (steglängd)
-    - Temperatur?
-        - Ta hänsyn till temperaturökning per år? / klimatförändringarna
+    - Datum
+    - Temperatur (°C)
+	    - Idealt: Atmosfärisk temperatur 
+	    - Annars: Marktemperatur
+    - Luftfuktighet 
 
-- [Klimat- och väderstatistik från Stockholms Stad](https://miljobarometern.stockholm.se/klimat/klimat-och-vaderstatistik/)
-    - [Årsnederbörd](https://miljobarometern.stockholm.se/klimat/klimat-och-vaderstatistik/arsnederbord/)
-        - _Nederbörden registreras av SMHI i Observatorielunden i centrala Stockholm. Mätningarna omfattar all nederbörd, både regn och snö. Definitionen på nederbörd är att det uppmätts minst 0,1 mm på ett dygn. Statistik över dygnsvärden kan laddas hem från SMHI Öppna data från 1961, vilket denna indikator baseras på._
-- [SMHI - Meteorologiska observationer](https://www.smhi.se/data/meteorologi/ladda-ner-meteorologiska-observationer/#param=airtemperatureInstant,stations=core,stationid=98210)
+Datakälla: [SMHI - Meteorologiska observationer](https://www.smhi.se/data/meteorologi/ladda-ner-meteorologiska-observationer/#param=airtemperatureInstant,stations=core,stationid=98210)
 
 ### 3. Inledande dataanalys
 - Komplett dataset?
@@ -49,7 +61,7 @@ Vilken typ av problem ska lösas? - Doukumentera
 - Labeled/unlabled data - behov av att själv skapa labels med hjälp av unsupervised learning (klassificeringsproblem)?
 - Reinforcement Learning och deep neural networks? - typ av data, datastruktur, utformning av belönings/bestraffningssystem, tolkning av output från nätverket, träningsplattform för nätverk?
 
-Regressionsproblem: förutse ett numeriskt värde (mängd nederbörd) baserat på historiskt data (nederbörd, dag). Om temperatur understiger 0 kan antagandet göras att nederbörden fås i form av snö. 
+Regressionsproblem: förutse ett numeriskt värde (mängd nederbörd) baserat på historiskt data (datum, nederbörd, temperatur, luftfuktighet).
 
 ---
 #### Bilagor:
@@ -61,3 +73,5 @@ Potentiella datakällor:
 
 - SMHI
 - Stockholms free data
+
+
