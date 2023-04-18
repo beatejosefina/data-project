@@ -70,16 +70,18 @@ Från Data Analysen utförd i _DataExploration.ipynb kunde följande observation
 - Preview av filerna visade att .csv-filerna inte enbart innehöll tabelldata utan även inledande information, vilket behövde städas bort i Excel innan de kunde läsas in med hjälp av pandas.
 - Utöver de initialt identifierade dataseten återfanns även data på __Nederbördstyp__, detta dataset förekom dock enbart med en tidsperiod på 12h för tidsperioden 2019-10-07 till 2023-04-14. Eftersom detta data var labeled behövdes inte längre nederbörd klassificeras/uppdkattas som snö utifrån den vetenskapliga "snöreceptet" ovan. Detta medförde att även att alla tillgängliga dataset med steglängden 12 h laddades ner (__Temperatur Min Max__) och undersöktes.
 - Data analysen visade att alla numeriska dataset utöver två bortvalda dataset (Nederbördsmängd) höll övervägande god datakvalitet (baserat på SMHIs självuppskattning i kombination med att data ej fattades). Hos klassificerings data (typ av nederbörd) var samtliga mätningar av sämre kvalitet (SMHIs självskattning), vilket kan vara relaterat till att klassificering av olika typer av snö/regn inte är numeriskt och utan snarare subjektivt och därmed inte alls lika konkret mätbart som t.ex. temperatur eller tid.
-- Utifrån Data Analysen kunde följande relevanta data fält identifierades:
- - __Datum__ & __Tid__ (för jämförelse av samma tidpunkt)
- - __Lufttemperatur__ (Min och max = __"Lufttempertur__", "__Lufttempertur.1__")
- - __Nederbörd__ (Typ av nederbörd)
- - __Relativ Luftfuktighet__
-- Då modellen kommer bygga på det lablade data (nederbördstyp) är det detta tidsintervall samt steglängd (12h) som kommer att användas för samtliga dataset:
- - *smhi_nederbördstyp_12h.csv* - sammanslaget med *smhi_nederbördstyp_12h_last4months.csv*
- - *smhi_lufttemperatur_minMax_12h.csv* - kommer kompletteras med data från de senaste 3 månaderna
- - *smhi_relativ_luftfuktighet_h.csv* - där min och max för en 12h period kommer att användas. Datasetet kommer även att kompletteras med data från de senaste 3 månaderna.
- - Övriga dataset i repot kommer __INTE__ att användas.
+
+Utifrån Data Analysen kunde följande relevanta data fält identifierades:
+- __Datum__ & __Tid__ (för jämförelse av samma tidpunkt)
+- __Lufttemperatur__ (Min och max = __"Lufttempertur__", "__Lufttempertur.1__")
+- __Nederbörd__ (Typ av nederbörd)
+- __Relativ Luftfuktighet__
+
+Då modellen kommer bygga på det lablade data (nederbördstyp) är det detta tidsintervall samt steglängd (12h) som kommer att användas för samtliga dataset:
+- *smhi_nederbördstyp_12h.csv* - sammanslaget med *smhi_nederbördstyp_12h_last4months.csv*
+- *smhi_lufttemperatur_minMax_12h.csv* - kommer kompletteras med data från de senaste 3 månaderna
+- *smhi_relativ_luftfuktighet_h.csv* - där min och max för en 12h period kommer att användas. Datasetet kommer även att kompletteras med data från de senaste 3 månaderna.
+- Övriga dataset i repot kommer __INTE__ att användas.
 
 ### 4. Identifiering av typ av problem
 _Vilken typ av problem ska lösas?_
