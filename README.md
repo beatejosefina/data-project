@@ -15,13 +15,13 @@ _Beskrivning av problemet och mål._
 
 #### Snöfalls förutsägelse för Stockholm.
 
-Årligen lamslås Stockholms kollektivtrafik av snöfall vilket medför negativa konsekvens för invånarna och viktiga samhällsfunktioner (utryckningsfordon, etc.). Idealt hade snöfalls förutsägelser kunnat användas för att bättre planera behov av jourhavande snöröjning.
+Årligen lamslås Stockholms kollektivtrafik av snöfall vilket medför negativa konsekvens för invånarna och viktiga samhällsfunktioner (utryckningsfordon, etc.). Idealt hade dagens väder kunnat användas för förutsäga morgondagens ev. snöfall så att kommunen bättre hade kunnat planera jourhavande snöröjning eller på annat sätt anpassa sin kollektivtrafik.
 
 ### 2. Identifiering av relevant data för att lösa problemet
 
 #### Identifiera förutsättningar för snö, [källa](https://nsidc.org/learn/parts-cryosphere/snow/science-snow):
 
-- För att det ska snöa måste det finnas fuktighet i atmosfären.
+- För att det ska snöa måste det finnas luftfuktighet i atmosfären.
 - Snö bildas när den atmosfäriska temperaturen är vid eller under fryspunkten (0°C) .
 - Generell regel: snö bildas inte om marktemperaturen är minst 5°C.
 - För marktemperaturen vid eller under fryspunkten kan snö nå marken, under optimala förhållanden kan snö nå marken vid högre temperaturer.
@@ -39,7 +39,7 @@ I detta projekt kommer det generella 10:1 snö-vatten förhållandet att använd
 
 - Historisk väderdata från centrala Stockholm innehållande:
   - Nederbörd (mm)
-  - Datum
+  - Datum (för att kunna genomföra jämförele av samma dag ifall data hämtas från olika källor)
   - Temperatur (°C)
     - Idealt: Atmosfärisk temperatur
     - Annars: Marktemperatur
@@ -47,7 +47,7 @@ I detta projekt kommer det generella 10:1 snö-vatten förhållandet att använd
 
 Datakälla: [SMHI - Meteorologiska observationer](https://www.smhi.se/data/meteorologi/ladda-ner-meteorologiska-observationer/#param=airtemperatureInstant,stations=core,stationid=98210)
 
-Vald väderstation: Stockholm-Observatoriekullen
+Vald väderstation: Stockholm-Observatoriekullen pga dess centrala läge.
 
 ### 3. Inledande dataanalys
 
@@ -60,11 +60,29 @@ _Under den inledande dataanalysfasen undersöktes data utifrån följande kriter
 - _Relevanta datafält?_
 - _Kan relevanta fält konverteras till ett numeriskt format?_
 
-I SMHIs Metetologiska databas återfanns historikst data för __Nerderbörd__, __Temperatur__ _(på mätstation, vilket antas vara marknivå)_ samt __Relativ luftfuktighet__. Dessa dataset kunnde fås med varierad tidsintervall (15 min, 1h, 12h , 1 dygn, osv.) för olika dataset. Dataseten med mät-tidsintervallet 1h valdes för närmare analys då denna var den enda steglängd som förekomm för samtliga utvalda dataset.
+I SMHIs Metetologiska databas återfanns historikst data för __Nerderbörd__, __Temperatur__ _(på mätstation, vilket antas vara marknivå)_ samt __Relativ luftfuktighet__. Dessa dataset kunnde fås med varierat tidsintervall (15 min, 1h, 12h , 1 dygn, osv.) för olika dataset. Dataseten med mät-tidsintervallet 1h valdes för närmare analys då denna var den enda steglängd som förekomm för samtliga utvalda dataset.
 
-Preview a filerna visade att .csv filerna inte enbart innehåll tabell data utan även inledande information, vilket behövde städas bort i Excel innan de kunde läsas in med hjälp av pandas.
+Preview a filerna visade att .csv filerna inte enbart innehåll tabelldata utan även inledande information, vilket behövde städas bort i Excel innan de kunde läsas in med hjälp av pandas.
 
-Utöver de initialt identifierade dataseten återfanns även data på __Nederbördstyp__, detta dataset förekom dock enbart med en tidsperiod på 12h. Eftersom detta data var labeled behövdes inte längre snö klassificeras/uppdkattas utifrån den vetenskapliga klassifikationen av snö utan detta dataset kundes istället användas direkt i ML modellen. Detta medförde att även tillgängliga dataset med steglängden 12 h laddades ner (__Temperatur Min Max__).
+Utöver de initialt identifierade dataseten återfanns även data på __Nederbördstyp__, detta dataset förekom dock enbart med en tidsperiod på 12h för tisperioden 2019-10-07 till 2023-04-14 . Eftersom detta data var labeled behövdes inte längre nederbörd (nederbörd > 0.0 mm = neberbörd) klassificeras/uppdkattas som snö utifrån den vetenskapliga "snöreceptet" ovan (Nederbörd + temp + luftfuktighet). Detta medförde att även tillgängliga dataset med steglängden 12 h laddades ner (__Temperatur Min Max__) och undersöktes.
+
+Data analysen visade att alla numeriska dataset utöver två bortvalda dataset (Nederbördsmäng) höll övervägande god datakvalitet (baserat på SMHI's självuppskattning i kombination med att data ej fattades). Hos klassificerings datat (typ av nederbörd) var samtliga mätningar av sämre kvalitet (SMHI's självskattning), vilket kan vara relaterat till att klassifiering av olika typer av snö/regn inte är nummeriskt och därmed snarare subjektivt och inte alls lika konkret mätbart som t.ex. tempertur eller tid.
+
+Utifrån Data Analysen utförd i _DataExploration.ipynb_ kunde följande relevanta data fält identiferades:
+
+- __Datum__ & __Tid__ (för jämförelse av samma tidpunkt)
+- __Lufttemperatur__ (Min och max = __"Lufttempertur__", "__Lufttempertur.1__")
+- __Nederbörd__ (Typ av nederbörd)
+- __Relativ Luftfuktighet__
+
+Då modellen kommer bygga på det lablade datat (nederbördstyp) är det detta tidsintervall samt steglängd (12h) som kommer att användas för samtliga dataset:
+
+- *smhi_nederbördstyp_12h.csv* - sammanslaget med *smhi_nederbördstyp_12h_last4months.csv*
+- *smhi_lufttemperatur_minMax_12h.csv* - kommer kompletteras med data från de senaste 3 månaderna
+- *smhi_relativ_luftfuktighet_h.csv* - där min och max för en 12h period kommer att användas. Datasetet kommer även att kompletteras med data från de senaste 3 månaderna.
+
+Övriga dataset i repot kommer __INTE__ att användas. 
+
 
 ### 4. Identifiering av typ av problem
 
@@ -74,19 +92,9 @@ Vilken typ av problem ska lösas? - Doukumentera
 - Labeled/unlabled data - behov av att själv skapa labels med hjälp av unsupervised learning (klassificeringsproblem)?
 - Reinforcement Learning och deep neural networks? - typ av data, datastruktur, utformning av belönings/bestraffningssystem, tolkning av output från nätverket, träningsplattform för nätverk?
 
+I detta fall:
 
-
-Regressions problem.
+- Regressions och klassifiicierings problem = 1. förutse nummeriska värden för morgondagens väder, 2. Klassificera detta som snöfall eller ej utifrån dessa värden.
+- Labelad data --> Supervised learning
 
 ---
-
-#### Bilagor:
-
-- Om du använder dataset - beskriv det data du hittat. Hur många rader har du? Hur är kvaliteten på datat.
-- Frivilligt: lämna in Jupyter Notebooks som visar hur du har undersökt ditt data (om du inte skall arbeta med Reinforcement
-  Learning).
-
-Potentiella datakällor:
-
-- SMHI
-- Stockholms free data
