@@ -67,8 +67,7 @@ Från data analysen utförd i _DataExploration.ipynb kunde följande observation
   - Dataseten med mät-tidsintervallet 1h valdes för närmare analys då denna var den enda steglängd som förekom för samtliga utvalda dataset.
 - __Data cleaning__: Preview av filerna visade att .csv-filerna inte enbart innehöll tabelldata utan även inledande information, vilket behövde städas bort i Excel innan de kunde läsas in med hjälp av pandas.
 - __Labled data__: Utöver de initialt identifierade dataseten återfanns även data på __Nederbördstyp__, detta dataset förekom dock enbart med tidsintervallet 12h för tidsperioden 2019-10-07 till 2023-04-14.
-  - Eftersom detta data var labeled drogs slutsatsen att nederbörd inte längre behövdes klassificeras/uppdkattas som snö utifrån den vetenskapliga "snöreceptet" ovan.
-  - --> Detta medförde även att alla tillgängliga dataset med steglängden 12 h laddades ner (__Temperatur Min Max__) och undersöktes.
+  - Eftersom detta data var labeled drogs slutsatsen att nederbörd inte längre behövdes klassificeras/uppskattas som snö utifrån den vetenskapliga "snöreceptet" ovan. Detta medförde även att alla tillgängliga dataset med steglängden 12 h laddades ner (__Temperatur Min Max__) och undersöktes.
 - __Datakvalitet / komplett dataset__: Data analysen visade att alla numeriska dataset utöver två bortvalda dataset (Nederbördsmängd) höll övervägande god datakvalitet (baserat på SMHIs självuppskattning i kombination med att data ej fattades). Hos klassificerings data (typ av nederbörd) var samtliga mätningar av sämre kvalitet (SMHIs självskattning), vilket kan vara relaterat till att klassificering av olika typer av snö/regn inte är numeriskt och utan snarare subjektivt och därmed inte alls lika konkret mätbart som t.ex. temperatur eller tid.
 
 Utifrån Data Analysen kunde följande relevanta data fält identifierades:
