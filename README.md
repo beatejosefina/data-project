@@ -60,7 +60,7 @@ _Under den inledande dataanalys-fasen undersöktes data utifrån följande krite
 - _Relevanta datafält?_
 - _Kan relevanta fält konverteras till ett numeriskt format?_
 
-Från data analysen utförd i _DataExploration.ipynb kunde följande observationer göras:_
+Från data analysen utförd i _`Del1_Datahandling/DataExploration.ipynb` kunde följande observationer göras:_
 
 - __Dataset__: I SMHIs Meteorologiska databas återfanns historiskt data för __Nerderbörd__, __Temperatur__ _(på mätstation, vilket antas vara marknivå)_ samt __Relativ luftfuktighet__.
   - Dessa dataset kunde fås med varierat tidsintervall (15 min, 1h, 12h , 1 dygn, osv.) för olika dataset.
@@ -102,7 +102,7 @@ I detta fall:
 
 Under Steg 2 utvidgades scopet för projektet. Istället för att enbart fokusera på en model som kan förutse snöfall, lades fokus på en modell som kan förutse all typ av nederbörd som förekom i SMHIs dataset. Detta då valda data fält bedöms relevanta för all typ av nederbörd och lablad data för dessa finns.
 
- Steg 2 kan sammanfattas i följande steg:
+ Steg 2 utfördes i `Del2_Datahandling.ipynb` och kan sammanfattas i följande steg:
 
 - **Data Pre-Processing/Cleaning:**
 
