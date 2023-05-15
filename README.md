@@ -95,3 +95,26 @@ I detta fall:
 - 1. Förutse numeriska värden för morgondagens väder
   2. Klassificera detta som snöfall eller ej utifrån dessa värden.
 - Labelad data --> Supervised learning
+
+---
+
+## STEG 2
+
+Under Steg 2 utvidgades scopet för projektet. Istället för att enbart fokusera på en model som kan förutse snöfall, lades fokus på en modell som kan förutse all typ av nederbörd som förekom i SMHIs dataset. Detta då valda data fält bedöms relevanta för all typ av nederbörd och lablad data för dessa finns.
+
+ Steg 2 kan sammanfattas i följande steg:
+
+- **Data Pre-Processing/Cleaning:**
+
+  - Sammanslagning av dataframes av samma typ men för olika tidsperioder
+    - Borttagning av dubbletter efter sammanslagning pga tidsöverlapp mellan datafilerna.
+  - Konvertering av data typ: fältet 'Datum' konverterades till typen datetame för att möjliggöra datumbaserad plottning
+  - Sammanslagning av data för **Nederbördstyp** (från nu refererat till som 'typ/type'), **Luftfuktighet** och **Lufttemperatur** ('temp') till en dataframe,  'Datum' och 'Tid (UTC)' användes som nyckel.
+- **Data Exploration**
+
+  - Plottning av det nya dataframen för att säkerställa att data inte innehåller outliners eller att data fattas
+- **Data Training**
+
+  - Uppdelning av dataset i tränings och validerings data
+  - Test och utvärdering av olika modeller
+- **Ytterligare test av model**
