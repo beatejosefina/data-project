@@ -1,8 +1,7 @@
 # data-project
 
-Eget projekt i kursen "Pythonprogrammering för AI-utveckling" vid IT-Högskolan VT23 med syftet att använda maskininlärning/AI till att lösa ett på förhand
-givet problem.
---------------
+*Eget projekt i kursen "Pythonprogrammering för AI-utveckling" vid IT-Högskolan VT23 med syftet att använda maskininlärning/AI till att lösa ett på förhand
+givet problem. Projektet var uppdelat i två steg: 1 och 2, där det första steget var fouserat på problemställning och mer high-level data exploration och andra steget bestod av data cleaning och implementering, träning och testing av ML.* 
 
 ## STEG 1
 
