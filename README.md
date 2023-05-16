@@ -1,7 +1,7 @@
 # data-project
 
 *Eget projekt i kursen "Pythonprogrammering för AI-utveckling" vid IT-Högskolan VT23 med syftet att använda maskininlärning/AI till att lösa ett på förhand
-givet problem. Projektet var uppdelat i två steg: 1 och 2, där det första steget var fouserat på problemställning och mer high-level data exploration och andra steget bestod av data cleaning och implementering, träning och testing av ML.* 
+givet problem. Projektet var uppdelat i två steg: 1 och 2, där det första steget var fouserat på problemställning och mer high-level data exploration och andra steget bestod av data cleaning och implementering, träning och testing av ML.*
 
 ## STEG 1
 
@@ -99,7 +99,7 @@ I detta fall:
 
 ## STEG 2
 
-Under Steg 2 utvidgades scopet för projektet. Istället för att enbart fokusera på en model som kan förutse snöfall, lades fokus på en modell som kan förutse all typ av nederbörd som förekom i SMHIs dataset. Detta då valda data fält bedöms relevanta för all typ av nederbörd och lablad data för dessa finns.
+Under Steg 2 utvidgades scopet för projektet. Istället för att enbart fokusera på en model som kan förutse snöfall, lades fokus på en modell som kan förutse all typ av nederbörd som förekom i SMHIs dataset. Detta då valda data fält bedöms relevanta för all typ av nederbörd och lablad data för dessa finns. Vidare lades fokus på att enbart lösa klassificerings delen av projektet då denna bedömdes som mest intressant.
 
  Steg 2 utfördes i `Del2_Datahandling.ipynb` och kan sammanfattas i följande steg:
 
@@ -111,9 +111,12 @@ Under Steg 2 utvidgades scopet för projektet. Istället för att enbart fokuser
   - Sammanslagning av data för **Nederbördstyp** (från nu refererat till som 'typ/type'), **Luftfuktighet** och **Lufttemperatur** ('temp') till en dataframe,  'Datum' och 'Tid (UTC)' användes som nyckel.
 - **Data Exploration**
 
-  - Plottning av det nya dataframen för att säkerställa att data inte innehåller outliners eller att data fattas
-- **Data Training**
+  - Plottning av det nya dataframen för att säkerställa att data inte innehåller outliners eller att data fattas.
+  - Pllottning av data för att identifiera potentiella kluster och korrelation/relation mellan data variabler.
+- **ML Training, Testing and Validation**
 
   - Uppdelning av dataset i tränings och validerings data
-  - Test och utvärdering av olika modeller
-- **Ytterligare test av model**
+  - Träning, test och utvärdering av olika modeller
+- **Förbättrings åtgärder**
+
+  - Itterering, förbättringsåtgärder bsaert på utfall av föregående steg
