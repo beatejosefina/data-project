@@ -1,7 +1,7 @@
 # data-project
 
 *Eget projekt i kursen "Pythonprogrammering för AI-utveckling" vid IT-Högskolan VT23 med syftet att använda maskininlärning/AI till att lösa ett på förhand
-givet problem. Projektet var uppdelat i två steg: 1 och 2, där det första steget var fouserat på problemställning och mer high-level data exploration och andra steget bestod av data cleaning och implementering, träning och testing av ML.*
+givet problem. Projektet var uppdelat i två steg: 1 och 2, där det första steget var fouserat på problemställning och mer high-level data exploration och andra steget bestod av data cleaning följt av träning, testing och utvärdering av ML.*
 
 Avslutande del av projektet återfinns i `Del2_Datahandling.ipynb`
 
@@ -69,7 +69,7 @@ Från data analysen utförd i _`Del1_Datahandling/DataExploration.ipynb` kunde f
 - __Data cleaning__: Preview av filerna visade att .csv-filerna inte enbart innehöll tabelldata utan även inledande information, vilket behövde städas bort i Excel innan de kunde läsas in med hjälp av pandas.
 - __Labled data__: Utöver de initialt identifierade dataseten återfanns även data på __Nederbördstyp__, detta dataset förekom dock enbart med tidsintervallet 12h för tidsperioden 2019-10-07 till 2023-04-14.
   - Eftersom detta data var labeled drogs slutsatsen att nederbörd inte längre behövdes klassificeras/uppskattas som snö utifrån den vetenskapliga "snöreceptet" ovan. Detta medförde även att alla tillgängliga dataset med steglängden 12 h laddades ner (__Temperatur Min Max__) och undersöktes.
-- __Datakvalitet / komplett dataset__: Data analysen visade att alla numeriska dataset utöver två bortvalda dataset (Nederbördsmängd) höll övervägande god datakvalitet (baserat på SMHIs självuppskattning i kombination med att data ej fattades). Hos klassificerings data (typ av nederbörd) var samtliga mätningar av sämre kvalitet (SMHIs självskattning), vilket kan vara relaterat till att klassificering av olika typer av snö/regn inte är numeriskt och utan snarare subjektivt och därmed inte alls lika konkret mätbart som t.ex. temperatur eller tid.
+- __Datakvalitet / komplett dataset__: Data analysen visade att alla numeriska dataset utöver två bortvalda, tomma dataset (Nederbördsmängd) höll övervägande god datakvalitet (baserat på SMHIs självuppskattning i kombination med att data ej fattades). Hos klassificerings data (typ av nederbörd) var samtliga mätningar av sämre kvalitet (SMHIs självskattning), vilket kan vara relaterat till att klassificering av olika typer av snö/regn inte är numeriskt och utan snarare subjektivt och därmed inte alls lika konkret mätbart som t.ex. temperatur eller tid.
 
 Utifrån Data Analysen kunde följande relevanta data fält identifierades:
 
@@ -101,31 +101,26 @@ I detta fall:
 
 ## STEG 2
 
-Under Steg 2 utvidgades scopet för projektet. Istället för att enbart fokusera på en model som kan förutse snöfall, lades fokus på en modell som kan förutse all typ av nederbörd som förekom i SMHIs dataset. Detta då valda data fält bedöms relevanta för all typ av nederbörd och lablad data för dessa finns. Vidare lades fokus på att enbart lösa klassificerings delen av projektet då denna bedömdes som mest intressant.
+Under Steg 2 uppdaterades scopet för projektet. Istället för att enbart fokusera på en model som kunde förutse snöfall, lades fokus på en modell som kunde förutse all typ av nederbörd som förekom i SMHIs dataset. Detta på grund av obalans i datasetet (övervägande datapunkter för regn jämfört med snö) samt att redan identifierade "relevanta data fält" för snö-klassificering även ansågs relevanta för annan typ av nederbörd. Vidare lades fokus på att enbart lösa klassificerings delen av projektet då denna bedömdes som mest intressant.
 
  Steg 2 utfördes i `Del2_Datahandling.ipynb` och kan sammanfattas i följande steg:
 
 ##### **Data Pre-Processing/Cleaning:**
-
 - Sammanslagning av dataframes av samma typ men för olika tidsperioder
   - Borttagning av dubbletter efter sammanslagning pga tidsöverlapp mellan datafilerna.
-- Konvertering av data typ: fältet 'Datum' konverterades till typen datetime för att möjliggöra datumbaserad plottning
+- Konvertering av datatyp: fältet 'Datum' konverterades till typen datetime för att möjliggöra datumbaserad analys
 - Sammanslagning av data för **Nederbördstyp** (från nu refererat till som 'typ/type'), **Luftfuktighet** och **Lufttemperatur** ('temp') till en dataframe,  'Datum' och 'Tid (UTC)' användes som nyckel.
 
 **Data Exploration**
-
-- Plottning av den sammanslagna dataframen för att säkerställa att data inte innehåller outliners eller att data fattas.
+- Plottning av den sammanslagna dataframen för att säkerställa att data inte innehöll outliners eller att data fattades.
 - Pllottning av data för att identifiera potentiella kluster och korrelation/relation mellan data variabler.
 
 ##### **ML Training, Testing and Validation**
-
 - Uppdelning av dataset i tränings och validerings data
 - Träning, test och utvärdering av olika modeller
 
 ##### **Förbättringsåtgärder**
-
 - Iterering, förbättringsåtgärder baserat på utfall av föregående steg
 
 ##### Future steps
-
-- Förslag på framtid aktiviteter för att förbättra projketet som helhet och framtagna  modell
+- Förslag på framtid aktiviteter för att förbättra projketet som helhet samt framtagna modell
