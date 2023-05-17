@@ -3,7 +3,7 @@
 *Eget projekt i kursen "Pythonprogrammering för AI-utveckling" vid IT-Högskolan VT23 med syftet att använda maskininlärning/AI till att lösa ett på förhand
 givet problem. Projektet var uppdelat i två steg: 1 och 2, där det första steget var fouserat på problemställning och mer high-level data exploration och andra steget bestod av data cleaning följt av träning, testing och utvärdering av ML.*
 
-Avslutande del av projektet återfinns i `Del2_Datahandling.ipynb`
+Avslutande del av projektet återfinns i `Del2_Datahandling.ipynb`	, en sammanfattning av val av algoritm och resultat återfinns i `ML.md`.
 
 ## STEG 1
 
@@ -106,21 +106,26 @@ Under Steg 2 uppdaterades scopet för projektet. Istället för att enbart fokus
  Steg 2 utfördes i `Del2_Datahandling.ipynb` och kan sammanfattas i följande steg:
 
 ##### **Data Pre-Processing/Cleaning:**
+
 - Sammanslagning av dataframes av samma typ men för olika tidsperioder
   - Borttagning av dubbletter efter sammanslagning pga tidsöverlapp mellan datafilerna.
 - Konvertering av datatyp: fältet 'Datum' konverterades till typen datetime för att möjliggöra datumbaserad analys
 - Sammanslagning av data för **Nederbördstyp** (från nu refererat till som 'typ/type'), **Luftfuktighet** och **Lufttemperatur** ('temp') till en dataframe,  'Datum' och 'Tid (UTC)' användes som nyckel.
 
 **Data Exploration**
+
 - Plottning av den sammanslagna dataframen för att säkerställa att data inte innehöll outliners eller att data fattades.
 - Pllottning av data för att identifiera potentiella kluster och korrelation/relation mellan data variabler.
 
 ##### **ML Training, Testing and Validation**
+
 - Uppdelning av dataset i tränings och validerings data
 - Träning, test och utvärdering av olika modeller
 
 ##### **Förbättringsåtgärder**
+
 - Iterering, förbättringsåtgärder baserat på utfall av föregående steg
 
 ##### Future steps
+
 - Förslag på framtid aktiviteter för att förbättra projketet som helhet samt framtagna modell
